@@ -1,17 +1,26 @@
 package com.github.pawelkorniak.consumer;
 
-import com.github.pawelkorniak.bus.EventConsumer;
 import com.github.pawelkorniak.game.BoardToPrint;
 import com.github.pawelkorniak.result.Result;
+import rx.Observer;
 
 import java.util.function.Consumer;
 
-public class Printer implements EventConsumer {
+class Printer implements OutputInterface{
 
     Consumer<String> stringConsumer = System.out::println;
 
     @Override
-    public void consumeEvent(Object event) {
+    public void onCompleted() {
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onNext(Object event) {
         if(event instanceof String text){
             stringConsumer.accept("printer : " + text);
         } if (event instanceof Result result){
@@ -19,5 +28,11 @@ public class Printer implements EventConsumer {
         } if (event instanceof BoardToPrint board){
             stringConsumer.accept(board.printBoard());
         }
+    }
+
+    @Override
+    public void print(Object object) {
+        stringConsumer.accept(object.toString());
+
     }
 }

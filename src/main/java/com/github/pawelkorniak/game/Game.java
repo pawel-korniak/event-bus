@@ -1,31 +1,41 @@
 package com.github.pawelkorniak.game;
 
-import com.github.pawelkorniak.bus.Bus;
-import com.github.pawelkorniak.consumer.Audit;
-import com.github.pawelkorniak.consumer.Logger;
-import com.github.pawelkorniak.consumer.Printer;
+import com.github.pawelkorniak.bus.Subject;
+import com.github.pawelkorniak.consumer.Auditor;
+import com.github.pawelkorniak.consumer.OutputInterface;
+import com.github.pawelkorniak.result.Result;
+import rx.subjects.PublishSubject;
 
 public class Game {
 
+
+    public static final String PROP = "console";
 
     public Game(String[] args) {
 
     }
 
-    public void play() {
+    public Result play() {
 
+        PublishSubject subject = Subject.getInstance();
 
-        Bus bus = Bus.getInstance();
-        final Audit audit = new Audit();
-        final Printer printer = new Printer();
-        final Logger logger = new Logger();
+        final Auditor auditor = Auditor.getAuditor();
+        final OutputInterface printer = OutputInterface.getInterface(PROP);
+        final MyLogger logger = new MyLogger();
 
-        bus.subscribe(audit);
-        bus.subscribe(printer);
-        bus.subscribe(logger);
+        subject.subscribe(auditor);
+        subject.subscribe(printer);
+        subject.subscribe(logger);
 
-        bus.send(123);
-        bus.send("asd");
-        bus.send(new BoardToCheck());
+        subject.onNext(123);
+        subject.onNext("asd");
+        BoardToCheck board = new BoardToCheckBySimpleAuditor();
+        subject.onNext(board);
+
+        return null;
+    }
+
+    public enum Sign {
+        X,O,T
     }
 }

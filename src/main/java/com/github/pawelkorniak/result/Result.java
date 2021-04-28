@@ -1,14 +1,17 @@
 package com.github.pawelkorniak.result;
 
-import com.github.pawelkorniak.game.Sign;
+import com.github.pawelkorniak.game.Game;
 
 import java.util.Map;
 
 public interface Result {
-    static Result getResult(Sign sign){
-        Map<Sign,Result> map = Map.of(Sign.X,new CrossWins());
-        return map.get(sign);
+    static Result getResult(Game.Sign sign){
+        Map<Game.Sign,Result> map = Map.of(
+                Game.Sign.X,new CrossWins(),
+                Game.Sign.O,new NaughtWins(),
+                Game.Sign.T,new Tie());
+        return map.getOrDefault(sign, new KeepPlaying());
     }
 
-    Sign getSign();
+    Game.Sign getSign();
 }

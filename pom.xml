@@ -25,10 +25,16 @@
         <version.plugin.maven.jar>3.1.0</version.plugin.maven.jar>
         <version.plugin.maven.compiler>3.8.0</version.plugin.maven.compiler>
         <version.plugin.maven.resources>3.1.0</version.plugin.maven.resources>
+        <rxjava.version>1.3.8</rxjava.version>
     </properties>
 
     <dependencies>
         <!-- #Your dependencies -->
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>${rxjava.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

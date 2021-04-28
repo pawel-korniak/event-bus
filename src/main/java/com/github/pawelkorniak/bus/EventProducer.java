@@ -1,10 +1,12 @@
 package com.github.pawelkorniak.bus;
 
+import rx.subjects.PublishSubject;
+
 public interface EventProducer<T> {
 
-    Bus bus = Bus.getInstance();
+    PublishSubject publisher = Subject.getInstance();
 
-    default void send(T data){
-        bus.send(data);
+    default void publish(T data){
+        publisher.onNext(data);
     }
 }

@@ -1,9 +1,10 @@
 package com.github.pawelkorniak.game;
 
-public class BoardToCheck implements Board{
-
-    @Override
-    public Sign getWinner() {
-        return Sign.X;
+public interface BoardToCheck {
+    static BoardToCheck getBoard(){
+        return new BoardToCheckBySimpleAuditor();
     }
+    BoardToPrint getBoardToPrint();
+    Game.Sign getWinner();
+    String toString();
 }

@@ -1,5 +1,5 @@
 package com.github.pawelkorniak.game;
 
-public class Coordinates {
+class Coordinates {
     int x,y;
 }
