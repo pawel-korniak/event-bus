@@ -1,8 +1,7 @@
 package com.github.pawelkorniak.consumer;
 
-import com.github.pawelkorniak.game.BoardToPrint;
+import com.github.pawelkorniak.board.BoardToPrint;
 import com.github.pawelkorniak.result.Result;
-import rx.Observer;
 
 import java.util.function.Consumer;
 

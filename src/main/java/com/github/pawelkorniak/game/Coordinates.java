@@ -1,5 +1,10 @@
 package com.github.pawelkorniak.game;
 
-class Coordinates {
-    int x,y;
+public class Coordinates {
+    private final int x,y;
+
+    public Coordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }

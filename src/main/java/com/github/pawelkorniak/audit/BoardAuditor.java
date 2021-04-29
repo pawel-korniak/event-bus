@@ -1,12 +1,12 @@
-package com.github.pawelkorniak.consumer;
+package com.github.pawelkorniak.audit;
 
-import com.github.pawelkorniak.game.BoardToCheck;
+import com.github.pawelkorniak.board.BoardToCheck;
 import com.github.pawelkorniak.game.Game;
 import com.github.pawelkorniak.result.Result;
 
-class SimpleAuditor implements Auditor{
+class BoardAuditor implements Auditor{
 
-    @Override
+
     public Result checkBoard(BoardToCheck board){
         // some logic that check if is any winner
         Game.Sign sign = board.getWinner();

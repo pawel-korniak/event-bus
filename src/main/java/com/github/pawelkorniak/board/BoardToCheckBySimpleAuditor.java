@@ -1,6 +1,9 @@
-package com.github.pawelkorniak.game;
+package com.github.pawelkorniak.board;
 
-class BoardToCheckBySimpleAuditor implements BoardToCheck {
+import com.github.pawelkorniak.subjects.BoardSubjectProducer;
+import com.github.pawelkorniak.game.Game;
+
+class BoardToCheckBySimpleAuditor implements BoardToCheck , BoardSubjectProducer {
 
     @Override
     public BoardToPrint getBoardToPrint() {
@@ -24,6 +27,8 @@ class BoardToCheckBySimpleAuditor implements BoardToCheck {
             -------
             """;
     }
+
+
 }
 
 

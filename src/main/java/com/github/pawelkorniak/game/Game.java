@@ -1,15 +1,22 @@
 package com.github.pawelkorniak.game;
 
-import com.github.pawelkorniak.bus.Subject;
-import com.github.pawelkorniak.consumer.Auditor;
+import com.github.pawelkorniak.board.BoardToCheck;
+import com.github.pawelkorniak.subjects.BoardSubject;
+import com.github.pawelkorniak.subjects.BusSubject;
+import com.github.pawelkorniak.audit.Auditor;
+import com.github.pawelkorniak.subjects.GameSubject;
 import com.github.pawelkorniak.consumer.OutputInterface;
+import com.github.pawelkorniak.player.Player;
 import com.github.pawelkorniak.result.Result;
+import com.github.pawelkorniak.subjects.GameSubjectProducer;
 import rx.subjects.PublishSubject;
 
-public class Game {
+public class Game implements GameSubjectProducer {
 
 
     public static final String PROP = "console";
+
+
 
     public Game(String[] args) {
 
@@ -17,20 +24,26 @@ public class Game {
 
     public Result play() {
 
-        PublishSubject subject = Subject.getInstance();
+        PublishSubject bus = BusSubject.getInstance();
 
-        final Auditor auditor = Auditor.getAuditor();
         final OutputInterface printer = OutputInterface.getInterface(PROP);
         final MyLogger logger = new MyLogger();
 
-        subject.subscribe(auditor);
-        subject.subscribe(printer);
-        subject.subscribe(logger);
+        bus.subscribe(printer);
+        bus.subscribe(logger);
 
-        subject.onNext(123);
-        subject.onNext("asd");
-        BoardToCheck board = new BoardToCheckBySimpleAuditor();
-        subject.onNext(board);
+        final Auditor boardAuditor = Auditor.getBoardAuditor();
+        PublishSubject<BoardToCheck> boardSubject = BoardSubject.getInstance();
+        boardSubject.subscribe(boardAuditor);
+        BoardToCheck board = BoardToCheck.getBoard();
+
+        final Auditor gameAuditor = Auditor.getBoardAuditor();
+        PublishSubject<Player> gameSubject = GameSubject.getInstance();
+        gameSubject.subscribe(player);
+
+        bus.onNext(123);
+        bus.onNext("asd");
+        bus.onNext(board);
 
         return null;
     }

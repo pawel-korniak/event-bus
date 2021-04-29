@@ -1,4 +1,4 @@
-package com.github.pawelkorniak.game;
+package com.github.pawelkorniak.board;
 
 public interface BoardToPrint {
 
