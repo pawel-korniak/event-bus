@@ -5,6 +5,7 @@ import com.github.pawelkorniak.game.Game;
 import java.util.Map;
 
 public interface Result {
+
     static Result getResult(Game.Sign sign){
         Map<Game.Sign,Result> map = Map.of(
                 Game.Sign.X,new CrossWins(),

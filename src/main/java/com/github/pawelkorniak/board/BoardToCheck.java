@@ -9,5 +9,5 @@ public interface BoardToCheck extends BoardSubjectProducer {
     }
     BoardToPrint getBoardToPrint();
     Game.Sign getWinner();
-    String toString();
+    String boardToString();
 }

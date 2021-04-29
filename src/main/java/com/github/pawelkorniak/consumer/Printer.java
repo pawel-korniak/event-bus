@@ -32,6 +32,5 @@ class Printer implements OutputInterface{
     @Override
     public void print(Object object) {
         stringConsumer.accept(object.toString());
-
     }
 }
